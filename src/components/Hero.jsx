@@ -45,7 +45,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
       >
-        📧 divyansh.choudhary@adypu.edu.in | 📱 +91 8016914779
+        📧 divyansh.choudhary@adypu.edu.in | 📱 +91 9509893772
       </motion.p>
 
       <motion.div
