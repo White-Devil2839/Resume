@@ -1,10 +1,19 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function Summary() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="summary"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0c1012] dark:text-white transition-colors duration-300"
+      className={
+        "py-20 px-6 transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-green-400"
+          : "bg-white text-black")
+      }
     >
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
@@ -18,7 +27,10 @@ export default function Summary() {
         </motion.h2>
 
         <motion.p
-          className="text-lg text-gray-700 dark:text-gray-400"
+          className={
+            "text-lg " +
+            (darkMode ? "text-gray-400" : "text-gray-700")
+          }
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}

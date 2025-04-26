@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const projects = [
   {
@@ -32,10 +34,17 @@ const projects = [
 ];
 
 export default function Projects() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="projects"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0c1012] dark:text-white transition-colors duration-300"
+      className={
+        "py-20 px-6 transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-white"
+          : "bg-white text-black")
+      }
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-green-400 mb-12 text-center">
@@ -45,7 +54,10 @@ export default function Projects() {
           {projects.map((proj, i) => (
             <motion.div
               key={i}
-              className="bg-white text-black dark:bg-black dark:text-white border border-green-600 p-6 rounded-lg shadow-lg hover:shadow-green-500/30 transition-all hover:-translate-y-2 hover:scale-105"
+              className={
+                "border border-green-600 p-6 rounded-lg shadow-lg transition-all hover:-translate-y-2 hover:scale-105 hover:shadow-green-500/30 " +
+                (darkMode ? "bg-black text-white" : "bg-white text-black")
+              }
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.6, ease: "easeOut" }}
@@ -69,6 +81,7 @@ export default function Projects() {
                 <a
                   href={proj.demo}
                   target="_blank"
+                  rel="noreferrer"
                   className="text-green-400 hover:underline"
                 >
                   Live Demo
@@ -76,6 +89,7 @@ export default function Projects() {
                 <a
                   href={proj.github}
                   target="_blank"
+                  rel="noreferrer"
                   className="text-green-400 hover:underline"
                 >
                   GitHub

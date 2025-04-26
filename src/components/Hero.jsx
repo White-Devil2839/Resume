@@ -1,20 +1,30 @@
-import { motion } from 'framer-motion';
-import { Typewriter } from 'react-simple-typewriter';
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { Typewriter } from "react-simple-typewriter";
 
 export default function Hero() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6 
-      bg-white dark:bg-gradient-to-br dark:from-black dark:via-gray-900 dark:to-black 
-      text-black dark:text-green-400 relative overflow-hidden transition-colors duration-300"
+      className={
+        "min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-green-400"
+          : "bg-white text-black")
+      }
     >
       {/* Background orbs */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-green-500 opacity-20 rounded-full blur-2xl animate-pulse" />
       <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-500 opacity-10 rounded-full blur-3xl animate-ping" />
 
       <motion.h1
-        className="text-5xl md:text-6xl font-extrabold mb-4 tracking-widest"
+        className={
+          "text-5xl md:text-6xl font-extrabold mb-4 tracking-widest " +
+          (darkMode ? "text-green-400" : "text-gray-800")
+        }
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -23,7 +33,10 @@ export default function Hero() {
       </motion.h1>
 
       <motion.h2
-        className="text-xl md:text-2xl font-medium mb-6"
+        className={
+          "text-xl md:text-2xl font-medium mb-6 " +
+          (darkMode ? "text-green-300" : "text-gray-700")
+        }
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.3 }}
@@ -40,7 +53,10 @@ export default function Hero() {
       </motion.h2>
 
       <motion.p
-        className="text-sm md:text-base mb-6 text-gray-500 dark:text-gray-400"
+        className={
+          "text-sm md:text-base mb-6 " +
+          (darkMode ? "text-gray-400" : "text-gray-600")
+        }
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}

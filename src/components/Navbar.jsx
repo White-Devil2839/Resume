@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import ThemeToggleButton from './ThemeToggleButton';
 
@@ -13,20 +15,30 @@ const links = [
 ];
 
 export default function Navbar() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full z-50 bg-white/80 text-black dark:bg-black/80 dark:text-white backdrop-blur-md border-b border-green-500 transition-colors duration-300"
+      className={`fixed top-0 left-0 w-full z-50 border-b backdrop-blur-md transition-colors duration-300 ${
+        darkMode
+          ? 'bg-black/80 text-white border-green-500'
+          : 'bg-white/80 text-black border-gray-300'
+      }`}
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <div className="font-bold text-indigo-600 dark:text-green-400 text-xl tracking-widest uppercase">
+        <div
+          className={`font-bold text-xl tracking-widest uppercase ${
+            darkMode ? 'text-green-400' : 'text-indigo-600'
+          }`}
+        >
           Divyansh
         </div>
 
-        {/* Nav Links */}
+        {/* Navigation Links */}
         <div className="flex items-center">
           <ul className="hidden md:flex gap-6 font-medium text-sm">
             {links.map((link) => (
@@ -37,7 +49,11 @@ export default function Navbar() {
               >
                 <a
                   href={link.href}
-                  className="hover:text-green-500 dark:hover:text-green-400 transition duration-200"
+                  className={`transition duration-200 ${
+                    darkMode
+                      ? 'hover:text-green-400'
+                      : 'hover:text-green-500'
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -45,7 +61,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Theme Toggle Button */}
+          {/* Toggle Button */}
           <ThemeToggleButton />
         </div>
       </div>

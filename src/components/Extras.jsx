@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const extras = [
   {
@@ -16,12 +18,19 @@ const extras = [
 ];
 
 export default function Extras() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="extras"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0e111a] dark:text-white relative overflow-hidden transition-colors duration-300"
+      className={
+        "py-20 px-6 relative overflow-hidden transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-white"
+          : "bg-white text-black")
+      }
     >
-      {/* Neon orbs in the background */}
+      {/* Neon orbs */}
       <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-40 h-40 bg-purple-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-10 right-10 w-28 h-28 bg-pink-500 opacity-10 rounded-full blur-2xl animate-bounce"></div>
 
@@ -33,7 +42,12 @@ export default function Extras() {
           {extras.map((item, i) => (
             <motion.li
               key={i}
-              className="p-5 bg-white text-black dark:bg-black dark:text-white rounded-lg border border-green-600 hover:shadow-green-500/30 shadow transition-all"
+              className={
+                "p-5 rounded-lg border border-green-600 hover:shadow-green-500/30 shadow transition-all " +
+                (darkMode
+                  ? "bg-black text-white"
+                  : "bg-white text-black")
+              }
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.2 }}
@@ -42,7 +56,7 @@ export default function Extras() {
               <h3 className="text-lg text-green-300 font-semibold mb-1">
                 {item.title}
               </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className={darkMode ? "text-gray-400" : "text-gray-500"}>
                 {item.desc}
               </p>
             </motion.li>

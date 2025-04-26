@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 const techSkills = [
   "HTML", "CSS", "JavaScript", "React", "Python", "Tailwind CSS", "Pandas"
@@ -9,12 +11,19 @@ const softSkills = [
 ];
 
 export default function Skills() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="skills"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0d1117] dark:text-white relative overflow-hidden transition-colors duration-300"
+      className={
+        "py-20 px-6 relative overflow-hidden transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-white"
+          : "bg-white text-black")
+      }
     >
-      {/* Glowing Orbs */}
+      {/* Background orbs */}
       <div className="absolute top-10 right-10 w-36 h-36 bg-green-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-10 left-10 w-40 h-40 bg-purple-500 opacity-10 rounded-full blur-3xl animate-ping"></div>
 

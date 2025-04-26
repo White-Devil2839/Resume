@@ -46,6 +46,7 @@
 
 import { useContext } from 'react';
 import { ThemeContext } from './context/ThemeContext';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Summary from './components/Summary';
@@ -56,28 +57,34 @@ import Skills from './components/Skills';
 import Certifications from './components/Certifications';
 import Extras from './components/Extras';
 import Footer from './components/Footer';
-
-
+import ResumeDownload from './components/ResumeDownload';
 
 export default function App() {
   const { darkMode } = useContext(ThemeContext);
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-white text-black dark:bg-[#0a0a0a] dark:text-white transition-colors duration-300">
-        <Navbar />
-        <main>
-          <Hero />
-          <Summary />
-          <Education />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Certifications />
-          <Extras />
-        </main>
-        <Footer />
-      </div>
+    <div
+      className={
+        "font-sans transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-white"
+          : "bg-white text-black")
+      }
+    >
+      <Navbar />
+      <main>
+        <Hero />
+        <Summary />
+        <Education />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Certifications />
+        <Extras />
+        <ResumeDownload />
+      </main>
+      <Footer />
     </div>
   );
 }
+

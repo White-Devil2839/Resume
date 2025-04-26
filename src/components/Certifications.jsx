@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const certs = [
   {
@@ -15,10 +17,17 @@ const certs = [
 ];
 
 export default function Certifications() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="certifications"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0f131a] dark:text-white transition-colors duration-300"
+      className={
+        "py-20 px-6 transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-white"
+          : "bg-white text-black")
+      }
     >
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold text-green-400 mb-12 text-center">
@@ -28,7 +37,10 @@ export default function Certifications() {
           {certs.map((cert, i) => (
             <motion.li
               key={i}
-              className="p-6 bg-white text-black dark:bg-black dark:text-white rounded-lg shadow border border-green-500 transition-all hover:shadow-green-500/30"
+              className={
+                "p-6 rounded-lg shadow border border-green-500 transition-all hover:shadow-green-500/30 " +
+                (darkMode ? "bg-black text-white" : "bg-white text-black")
+              }
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.2 }}
@@ -37,7 +49,7 @@ export default function Certifications() {
               <h3 className="text-lg font-semibold text-green-300">
                 {cert.title}
               </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className={darkMode ? "text-gray-400" : "text-gray-500"}>
                 {cert.org} • {cert.date}
               </p>
               {cert.link && (

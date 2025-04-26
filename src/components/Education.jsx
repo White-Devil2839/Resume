@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const educationData = [
   {
@@ -22,10 +24,17 @@ const educationData = [
 ];
 
 export default function Education() {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <section
       id="education"
-      className="py-20 px-6 bg-white text-black dark:bg-[#0d1117] dark:text-white transition-colors duration-300"
+      className={
+        "py-20 px-6 transition-colors duration-300 " +
+        (darkMode
+          ? "bg-gradient-to-br from-black via-gray-900 to-black text-green-400"
+          : "bg-white text-black")
+      }
     >
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold text-green-400 mb-12 text-center">
